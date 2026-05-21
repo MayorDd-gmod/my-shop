@@ -28,10 +28,6 @@
             font-weight: bold;
             color: #1e3a8a;
             padding: 25px 0 10px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.05);
-        }
-        .logo span {
-            color: #3b82f6;
         }
         .shop-title {
             text-align: center;
@@ -40,7 +36,16 @@
         .shop-title h2 {
             color: #1e3a8a;
             font-size: 32px;
-            font-weight: 600;
+        }
+        .cooldown-timer {
+            text-align: center;
+            background: #dc2626;
+            color: white;
+            padding: 10px;
+            border-radius: 12px;
+            margin: 20px auto;
+            max-width: 400px;
+            font-weight: bold;
         }
         .category-header {
             display: flex;
@@ -134,7 +139,12 @@
             width: 100%;
             transition: all 0.3s;
         }
-        .buy-btn:hover {
+        .buy-btn:disabled {
+            background: #9ca3af;
+            cursor: not-allowed;
+            transform: none;
+        }
+        .buy-btn:hover:not(:disabled) {
             background: #1e3a8a;
             transform: scale(1.02);
         }
@@ -296,8 +306,13 @@
             width: 100%;
             font-size: 16px;
             transition: 0.3s;
+            margin-top: 15px;
         }
-        .send-order:hover {
+        .send-order:disabled {
+            background: #9ca3af;
+            cursor: not-allowed;
+        }
+        .send-order:hover:not(:disabled) {
             background: #1e3a8a;
         }
         .notification {
@@ -337,6 +352,8 @@
         <h2>Интернет-Магазин</h2>
     </div>
 
+    <div class="cooldown-timer" id="cooldownTimer" style="display: none;"></div>
+
     <div class="category-header">
         <h3>Без рецепта</h3>
         <span class="no-prescription-badge">Доступно всем</span>
@@ -347,42 +364,42 @@
             <div class="product-desc">Парацетамол — жаропонижающее, обезболивающее</div>
             <div class="price">350 ₽</div>
             <span class="prescription-tag free">Без рецепта</span>
-            <button class="buy-btn" onclick="addToCart('Tylenol 500 мг', 350)">В корзину</button>
+            <button class="buy-btn" onclick="addToCartWithCooldown('Tylenol 500 мг', 350, this)">В корзину</button>
         </div>
         <div class="product">
             <h3>Advil 200 мг</h3>
             <div class="product-desc">Ибупрофен — от головной и мышечной боли</div>
             <div class="price">450 ₽</div>
             <span class="prescription-tag free">Без рецепта</span>
-            <button class="buy-btn" onclick="addToCart('Advil 200 мг', 450)">В корзину</button>
+            <button class="buy-btn" onclick="addToCartWithCooldown('Advil 200 мг', 450, this)">В корзину</button>
         </div>
         <div class="product">
             <h3>Aleve 220 мг</h3>
             <div class="product-desc">Напроксен — длительное обезболивание</div>
             <div class="price">500 ₽</div>
             <span class="prescription-tag free">Без рецепта</span>
-            <button class="buy-btn" onclick="addToCart('Aleve 220 мг', 500)">В корзину</button>
+            <button class="buy-btn" onclick="addToCartWithCooldown('Aleve 220 мг', 500, this)">В корзину</button>
         </div>
         <div class="product">
             <h3>Zyrtec 10 мг</h3>
             <div class="product-desc">Цетиризин — от аллергии</div>
             <div class="price">280 ₽</div>
             <span class="prescription-tag free">Без рецепта</span>
-            <button class="buy-btn" onclick="addToCart('Zyrtec 10 мг', 280)">В корзину</button>
+            <button class="buy-btn" onclick="addToCartWithCooldown('Zyrtec 10 мг', 280, this)">В корзину</button>
         </div>
         <div class="product">
             <h3>Sudafed</h3>
             <div class="product-desc">Псевдоэфедрин — от заложенности носа</div>
             <div class="price">320 ₽</div>
             <span class="prescription-tag free">Без рецепта</span>
-            <button class="buy-btn" onclick="addToCart('Sudafed', 320)">В корзину</button>
+            <button class="buy-btn" onclick="addToCartWithCooldown('Sudafed', 320, this)">В корзину</button>
         </div>
         <div class="product">
             <h3>Nexium 20 мг</h3>
             <div class="product-desc">Эзомепразол — от изжоги и кислотности</div>
             <div class="price">750 ₽</div>
             <span class="prescription-tag free">Без рецепта</span>
-            <button class="buy-btn" onclick="addToCart('Nexium 20 мг', 750)">В корзину</button>
+            <button class="buy-btn" onclick="addToCartWithCooldown('Nexium 20 мг', 750, this)">В корзину</button>
         </div>
     </div>
 
@@ -396,63 +413,63 @@
             <div class="product-desc">Амфетамин — лечение СДВГ</div>
             <div class="price">1200 ₽</div>
             <span class="prescription-tag required">Только по рецепту</span>
-            <button class="buy-btn" onclick="addToCart('Adderall 10 мг', 1200)">В корзину</button>
+            <button class="buy-btn" onclick="addToCartWithCooldown('Adderall 10 мг', 1200, this)">В корзину</button>
         </div>
         <div class="product">
             <h3>Xanax 0.5 мг</h3>
             <div class="product-desc">Алпразолам — против тревоги и паники</div>
             <div class="price">850 ₽</div>
             <span class="prescription-tag required">Только по рецепту</span>
-            <button class="buy-btn" onclick="addToCart('Xanax 0.5 мг', 850)">В корзину</button>
+            <button class="buy-btn" onclick="addToCartWithCooldown('Xanax 0.5 мг', 850, this)">В корзину</button>
         </div>
         <div class="product">
             <h3>Ozempic 0.5 мг</h3>
             <div class="product-desc">Семаглутид — для похудения и диабета</div>
             <div class="price">1500 ₽</div>
             <span class="prescription-tag required">Только по рецепту</span>
-            <button class="buy-btn" onclick="addToCart('Ozempic 0.5 мг', 1500)">В корзину</button>
+            <button class="buy-btn" onclick="addToCartWithCooldown('Ozempic 0.5 мг', 1500, this)">В корзину</button>
         </div>
         <div class="product">
             <h3>Lipitor 20 мг</h3>
             <div class="product-desc">Аторвастатин — снижение холестерина</div>
             <div class="price">620 ₽</div>
             <span class="prescription-tag required">Только по рецепту</span>
-            <button class="buy-btn" onclick="addToCart('Lipitor 20 мг', 620)">В корзину</button>
+            <button class="buy-btn" onclick="addToCartWithCooldown('Lipitor 20 мг', 620, this)">В корзину</button>
         </div>
         <div class="product">
             <h3>Prozac 20 мг</h3>
             <div class="product-desc">Флуоксетин — антидепрессант</div>
             <div class="price">780 ₽</div>
             <span class="prescription-tag required">Только по рецепту</span>
-            <button class="buy-btn" onclick="addToCart('Prozac 20 мг', 780)">В корзину</button>
+            <button class="buy-btn" onclick="addToCartWithCooldown('Prozac 20 мг', 780, this)">В корзину</button>
         </div>
         <div class="product">
             <h3>Viagra 100 мг</h3>
             <div class="product-desc">Силденафил — для мужского здоровья</div>
             <div class="price">900 ₽</div>
             <span class="prescription-tag required">Только по рецепту</span>
-            <button class="buy-btn" onclick="addToCart('Viagra 100 мг', 900)">В корзину</button>
+            <button class="buy-btn" onclick="addToCartWithCooldown('Viagra 100 мг', 900, this)">В корзину</button>
         </div>
         <div class="product">
             <h3>Amoxicillin 500 мг</h3>
             <div class="product-desc">Антибиотик широкого спектра</div>
             <div class="price">550 ₽</div>
             <span class="prescription-tag required">Только по рецепту</span>
-            <button class="buy-btn" onclick="addToCart('Amoxicillin 500 мг', 550)">В корзину</button>
+            <button class="buy-btn" onclick="addToCartWithCooldown('Amoxicillin 500 мг', 550, this)">В корзину</button>
         </div>
         <div class="product">
             <h3>Cipro 500 мг</h3>
             <div class="product-desc">Ципрофлоксацин — антибиотик</div>
             <div class="price">680 ₽</div>
             <span class="prescription-tag required">Только по рецепту</span>
-            <button class="buy-btn" onclick="addToCart('Cipro 500 мг', 680)">В корзину</button>
+            <button class="buy-btn" onclick="addToCartWithCooldown('Cipro 500 мг', 680, this)">В корзину</button>
         </div>
         <div class="product">
             <h3>Hydrocodone 10 мг</h3>
             <div class="product-desc">Опиоидное обезболивающее</div>
             <div class="price">1800 ₽</div>
             <span class="prescription-tag required">Строгий рецепт</span>
-            <button class="buy-btn" onclick="addToCart('Hydrocodone 10 мг', 1800)">В корзину</button>
+            <button class="buy-btn" onclick="addToCartWithCooldown('Hydrocodone 10 мг', 1800, this)">В корзину</button>
         </div>
     </div>
 </div>
@@ -472,7 +489,7 @@
         <input type="text" id="discordName" placeholder="Ваш Discord">
     </div>
     <div class="cart-total" id="cartTotal">Итого: 0 ₽</div>
-    <button class="send-order" onclick="sendOrder()">Отправить заказ</button>
+    <button class="send-order" id="sendOrderBtn" onclick="sendOrder()">Отправить заказ</button>
 </div>
 
 <div class="footer">
@@ -481,8 +498,36 @@
 
 <script>
     let cart = [];
+    let cooldownEndTime = localStorage.getItem('cooldownEndTime') ? parseInt(localStorage.getItem('cooldownEndTime')) : 0;
+    let timerInterval = null;
+    let addCooldownActive = false;
     
-    function addToCart(name, price) {
+    function addToCartWithCooldown(name, price, button) {
+        if (addCooldownActive) {
+            showNotification('Подождите 3 секунды перед добавлением следующего товара');
+            return;
+        }
+        
+        if (isCooldownActive()) {
+            showNotification('Подождите ' + getRemainingCooldownMinutes() + ' мин ' + getRemainingCooldownSeconds() + ' сек перед новой покупкой');
+            return;
+        }
+        
+        addCooldownActive = true;
+        button.disabled = true;
+        
+        let timeLeft = 3;
+        
+        const interval = setInterval(() => {
+            timeLeft--;
+            if (timeLeft < 0) {
+                clearInterval(interval);
+                addCooldownActive = false;
+                const allButtons = document.querySelectorAll('.buy-btn');
+                allButtons.forEach(btn => { btn.disabled = false; });
+            }
+        }, 1000);
+        
         const existing = cart.find(item => item.name === name);
         if (existing) {
             existing.quantity++;
@@ -549,15 +594,57 @@
         setTimeout(() => notification.remove(), 2000);
     }
     
+    function isCooldownActive() {
+        return Date.now() < cooldownEndTime;
+    }
+    
+    function getRemainingCooldownSeconds() {
+        if (!isCooldownActive()) return 0;
+        return Math.floor((cooldownEndTime - Date.now()) / 1000);
+    }
+    
+    function getRemainingCooldownMinutes() {
+        if (!isCooldownActive()) return 0;
+        return Math.floor((cooldownEndTime - Date.now()) / 60000);
+    }
+    
+    function startCooldown() {
+        cooldownEndTime = Date.now() + 1.5 * 60 * 1000;
+        localStorage.setItem('cooldownEndTime', cooldownEndTime);
+        updateCooldownDisplay();
+    }
+    
+    function updateCooldownDisplay() {
+        const timerDiv = document.getElementById('cooldownTimer');
+        const sendBtn = document.getElementById('sendOrderBtn');
+        
+        if (isCooldownActive()) {
+            const remainingSec = getRemainingCooldownSeconds();
+            const minutes = Math.floor(remainingSec / 60);
+            const seconds = remainingSec % 60;
+            timerDiv.innerHTML = '⏳ Следующая покупка через: ' + minutes + ' мин ' + seconds + ' сек';
+            timerDiv.style.display = 'block';
+            if (sendBtn) sendBtn.disabled = true;
+        } else {
+            timerDiv.style.display = 'none';
+            if (sendBtn) sendBtn.disabled = false;
+        }
+    }
+    
     function sendOrder() {
         if (cart.length === 0) {
-            showNotification('Корзина пуста');
+            showNotification('❌ Корзина пуста');
+            return;
+        }
+        
+        if (isCooldownActive()) {
+            showNotification('Подождите ' + getRemainingCooldownMinutes() + ' мин ' + getRemainingCooldownSeconds() + ' сек перед новой покупкой');
             return;
         }
         
         const discordName = document.getElementById('discordName').value;
         if (!discordName) {
-            showNotification('Введите ваш Discord');
+            showNotification('❌ Введите ваш Discord');
             return;
         }
         
@@ -568,7 +655,7 @@
             total += item.price * item.quantity;
         });
         
-        const message = `**НОВЫЙ ЗАКАЗ!**\n\n**Discord:** ${discordName}\n**Заказ:**\n${itemsText}\n**Итого:** ${total} ₽`;
+        const message = `**🆕 НОВЫЙ ЗАКАЗ!**\n\n**📦 Discord:** ${discordName}\n**📋 Заказ:**\n${itemsText}\n**💰 Итого:** ${total} ₽`;
         
         const webhookURL = "https://discord.com/api/webhooks/1506931485427368006/pNznPDWpkrmhNzS2jwC4tjh-cU4trzDq4jAuJncgNdIatN93o9ugwrpT9ydRt7Q3tjTT";
         
@@ -579,21 +666,23 @@
         })
         .then(res => {
             if (res.ok) {
-                showNotification('Заказ отправлен! Мы свяжемся с вами в Discord');
+                showNotification('✅ Заказ отправлен! Следующая покупка через 1.5 минуты');
+                startCooldown();
                 cart = [];
                 updateCart();
                 toggleCart();
                 document.getElementById('discordName').value = '';
             } else {
-                showNotification('Ошибка отправки');
+                showNotification('❌ Ошибка отправки');
             }
         })
-        .catch(() => showNotification('Ошибка соединения'));
+        .catch(() => showNotification('❌ Ошибка соединения'));
     }
+    
+    if (timerInterval) clearInterval(timerInterval);
+    timerInterval = setInterval(updateCooldownDisplay, 1000);
+    updateCooldownDisplay();
 </script>
-
-</body>
-</html>
 
 </body>
 </html>
