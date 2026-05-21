@@ -15,54 +15,28 @@
             background: #0a0f1e;
             color: #fff;
         }
-        .header {
-            background: #0d1425;
-            padding: 20px 0;
-            border-bottom: 2px solid #27ae60;
-        }
         .container {
             max-width: 1200px;
             margin: 0 auto;
             padding: 0 20px;
         }
-        .header-content {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 15px;
-        }
         .logo {
-            font-size: 28px;
+            text-align: center;
+            font-size: 32px;
             font-weight: bold;
             color: #27ae60;
+            padding: 30px 0 10px;
         }
         .logo span {
             color: #fff;
         }
-        .nav {
-            display: flex;
-            gap: 25px;
-        }
-        .nav a {
-            color: #ccc;
-            text-decoration: none;
-            transition: color 0.3s;
-        }
-        .nav a:hover {
-            color: #27ae60;
-        }
         .shop-title {
             text-align: center;
-            margin: 40px 0 20px;
+            margin: 20px 0 40px;
         }
         .shop-title h2 {
             color: #27ae60;
-            font-size: 32px;
-        }
-        .shop-title p {
-            color: #888;
-            margin-top: 5px;
+            font-size: 36px;
         }
         .products {
             display: grid;
@@ -76,14 +50,14 @@
             padding: 25px;
             text-align: center;
             transition: 0.3s;
-            border: 1px solid transparent;
+            border: 1px solid #1a2340;
         }
         .product:hover {
             transform: translateY(-5px);
             border-color: #27ae60;
         }
         .product h3 {
-            font-size: 20px;
+            font-size: 22px;
             margin-bottom: 10px;
         }
         .price {
@@ -273,24 +247,11 @@
 </head>
 <body>
 
-<div class="header">
-    <div class="container">
-        <div class="header-content">
-            <div class="logo">💊 Michigan<span> Drug Store</span></div>
-            <div class="nav">
-                <a href="#">Главная</a>
-                <a href="#">Интернет-Магазин</a>
-                <a href="#">Доставка</a>
-                <a href="#">Контакты</a>
-            </div>
-        </div>
-    </div>
-</div>
-
 <div class="container">
+    <div class="logo">💊 Michigan<span> Drug Store</span></div>
+    
     <div class="shop-title">
-        <h2>🏪 Интернет-Магазин</h2>
-        <p>Лекарства с доставкой на дом</p>
+        <h2>Интернет-Магазин</h2>
     </div>
     
     <div class="products">
@@ -305,9 +266,24 @@
             <button class="buy-btn" onclick="addToCart('Антибиотик', 650)">В корзину</button>
         </div>
         <div class="product">
-            <h3>🌡️ Электронный градусник</h3>
+            <h3>💊⚡⚗️Комбо (Всё сразу)</h3></h3>
             <div class="price">450 ₽</div>
-            <button class="buy-btn" onclick="addToCart('Электронный градусник', 450)">В корзину</button>
+            <button class="buy-btn" onclick="addToCart('Градусник', 450)">В корзину</button>
+        </div>
+        <div class="product">
+            <h3>⚡ Адреналин</h3>
+            <div class="price">200 ₽</div>
+            <button class="buy-btn" onclick="addToCart('Адреналин', 1200)">В корзину</button>
+        </div>
+        <div class="product">
+            <h3>💊 Дексткроозу</h3>
+            <div class="price">700 ₽</div>
+            <button class="buy-btn" onclick="addToCart('Дексткроозу', 800)">В корзину</button>
+        </div>
+        <div class="product">
+            <h3>⚗️ Амфетамин</h3>
+            <div class="price">500 ₽</div>
+            <button class="buy-btn" onclick="addToCart('Амфетамин', 2500)">В корзину</button>
         </div>
     </div>
 </div>
@@ -324,14 +300,14 @@
     </div>
     <div class="cart-items" id="cartItems"></div>
     <div class="discord-input">
-        <input type="text" id="discordName" placeholder="Ваш Discord (Dunya#1234)">
+        <input type="text" id="discordName" placeholder="Ваш Discord">
     </div>
     <div class="cart-total" id="cartTotal">Итого: 0 ₽</div>
-    <button class="send-order" onclick="sendOrder()">📨 Отправить заказ в Discord</button>
+    <button class="send-order" onclick="sendOrder()">📨 Отправить заказ</button>
 </div>
 
 <div class="footer">
-    <p>© 2026 Michigan Drug Store | Лучшая аптека в Доброграде и в округе Уэйна</p>
+    <p>© 2026 Michigan Drug Store</p>
 </div>
 
 <script>
@@ -345,7 +321,7 @@
             cart.push({ name, price, quantity: 1 });
         }
         updateCart();
-        showNotification(`✅ ${name} добавлен в корзину`);
+        showNotification(`✅ ${name} добавлен`);
     }
     
     function updateCart() {
@@ -401,18 +377,18 @@
         notification.className = 'notification';
         notification.innerHTML = message;
         document.body.appendChild(notification);
-        setTimeout(() => notification.remove(), 2500);
+        setTimeout(() => notification.remove(), 2000);
     }
     
     function sendOrder() {
         if (cart.length === 0) {
-            showNotification('❌ Корзина пуста!');
+            showNotification('❌ Корзина пуста');
             return;
         }
         
         const discordName = document.getElementById('discordName').value;
         if (!discordName) {
-            showNotification('❌ Введите ваш Discord!');
+            showNotification('❌ Введите Discord');
             return;
         }
         
@@ -423,7 +399,7 @@
             total += item.price * item.quantity;
         });
         
-        const message = `**🆕 НОВЫЙ ЗАКАЗ В АПТЕКЕ!**\n\n**📦 Discord:** ${discordName}\n**📋 Заказ:**\n${itemsText}\n**💰 Итого:** ${total} ₽\n**⏰ Время:** ${new Date().toLocaleString()}`;
+        const message = `**🆕 НОВЫЙ ЗАКАЗ!**\n\n**📦 Discord:** ${discordName}\n**📋 Заказ:**\n${itemsText}\n**💰 Итого:** ${total} ₽`;
         
         const webhookURL = "https://discord.com/api/webhooks/1506931485427368006/pNznPDWpkrmhNzS2jwC4tjh-cU4trzDq4jAuJncgNdIatN93o9ugwrpT9ydRt7Q3tjTT";
         
@@ -434,20 +410,18 @@
         })
         .then(res => {
             if (res.ok) {
-                showNotification('✅ Заказ отправлен! Мы свяжемся с вами в Discord');
+                showNotification('✅ Заказ отправлен');
                 cart = [];
                 updateCart();
                 toggleCart();
                 document.getElementById('discordName').value = '';
             } else {
-                showNotification('❌ Ошибка отправки. Проверьте вебхук');
+                showNotification('❌ Ошибка');
             }
         })
-        .catch(() => showNotification('❌ Ошибка соединения'));
+        .catch(() => showNotification('❌ Ошибка'));
     }
 </script>
 
-</body>
-</html>
 </body>
 </html>
