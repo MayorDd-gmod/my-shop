@@ -1,11 +1,52 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Мой магазин</title>
+    <title>Аптека</title>
     <meta charset="utf-8">
+    <style>
+        body { font-family: Arial, sans-serif; max-width: 800px; margin: 0 auto; padding: 20px; }
+        .product { border: 1px solid #ddd; border-radius: 8px; padding: 15px; margin: 15px 0; background: #f9f9f9; }
+        button { background: #28a745; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; font-size: 16px; }
+        button:hover { background: #218838; }
+    </style>
+    <link rel="stylesheet" href="https://cdn.snipcart.com/themes/v3.2.2/default/snipcart.css" />
+    <script async src="https://cdn.snipcart.com/themes/v3.2.2/default/snipcart.js"></script>
+    <div id="snipcart" data-api-key="YWU0ZDcyZmQtYjA4Zi00YzVlLWFlNmItMDUxNTViYmJmYzU0NjM5MTQ5NDExNzY2NTk0NzI5" hidden></div>
+    <script>
+        document.addEventListener("snipcart.ready", function() {
+            Snipcart.events.on('order.completed', function(order) {
+                window.location.href = 'https://discord.gg/TjZZV26FHK';
+            });
+        });
+    </script>
 </head>
 <body>
-    <h1>Мой магазин</h1>
-    <p>Сайт работает!</p>
+    <h1>💊 Аптека</h1>
+    <p>Нажмите "Купить" → товар добавится в корзину. После оплаты — приглашение в Discord!</p>
+
+    <div class="product">
+        <h2>💊 Парацетамол 500 мг</h2>
+        <p>Цена: 250 ₽</p>
+        <button class="snipcart-add-item" data-item-id="paracetamol" data-item-price="150" data-item-name="Парацетамол 500 мг" data-item-url="/">🛒 Купить</button>
+    </div>
+
+    <div class="product">
+        <h2>💊 Аскорбиновая кислота</h2>
+        <p>Цена: 90 ₽</p>
+        <button class="snipcart-add-item" data-item-id="vitamin-c" data-item-price="90" data-item-name="Аскорбиновая кислота" data-item-url="/">🛒 Купить</button>
+    </div>
+
+    <div class="product">
+        <h2>🌡️ Электронный градусник</h2>
+        <p>Цена: 650 ₽</p>
+        <button class="snipcart-add-item" data-item-id="thermometer" data-item-price="450" data-item-name="Электронный градусник" data-item-url="/">🛒 Купить</button>
+    </div>
+</body>
+</html>
+            data-item-name="Электронный градусник"
+            data-item-url="/">
+            🛒 Купить
+        </button>
+    </div>
 </body>
 </html>
