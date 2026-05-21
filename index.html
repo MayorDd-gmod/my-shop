@@ -1,52 +1,122 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Аптека</title>
+    <title>Michigan drug store</title>
     <meta charset="utf-8">
     <style>
-        body { font-family: Arial, sans-serif; max-width: 800px; margin: 0 auto; padding: 20px; }
-        .product { border: 1px solid #ddd; border-radius: 8px; padding: 15px; margin: 15px 0; background: #f9f9f9; }
-        button { background: #28a745; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; font-size: 16px; }
-        button:hover { background: #218838; }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            background: #f0f4f8;
+            padding: 20px;
+        }
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        .test-warning {
+            background: #ff4444;
+            color: white;
+            text-align: center;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            font-weight: bold;
+            font-size: 18px;
+        }
+        .header {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        h1 {
+            color: #2c3e50;
+            font-size: 28px;
+        }
+        .products {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        .product {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            text-align: center;
+        }
+        .product h2 {
+            color: #2c3e50;
+            font-size: 20px;
+            margin-bottom: 10px;
+        }
+        .price {
+            font-size: 24px;
+            font-weight: bold;
+            color: #27ae60;
+            margin: 15px 0;
+        }
+        .buy-btn {
+            background: #27ae60;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            width: 100%;
+        }
+        .footer {
+            text-align: center;
+            padding: 20px;
+            color: #7f8c8d;
+            font-size: 14px;
+        }
     </style>
     <link rel="stylesheet" href="https://cdn.snipcart.com/themes/v3.2.2/default/snipcart.css" />
     <script async src="https://cdn.snipcart.com/themes/v3.2.2/default/snipcart.js"></script>
-    <div id="snipcart" data-api-key="YWU0ZDcyZmQtYjA4Zi00YzVlLWFlNmItMDUxNTViYmJmYzU0NjM5MTQ5NDExNzY2NTk0NzI5" hidden></div>
+    <div id="snipcart" data-api-key="ST_YWU0ZDcyZmQtYjA4Zi00YzVlLWFlNmItMDUxNTViYmJmYzU0NjM5MTQ5NDExNzY2NTk0NzI5" hidden></div>
     <script>
         document.addEventListener("snipcart.ready", function() {
-            Snipcart.events.on('order.completed', function(order) {
+            Snipcart.events.on('cart.opened', function() {
                 window.location.href = 'https://discord.gg/TjZZV26FHK';
             });
         });
     </script>
 </head>
 <body>
-    <h1>💊 Аптека</h1>
-    <p>Нажмите "Купить" → товар добавится в корзину. После оплаты — приглашение в Discord!</p>
-
-    <div class="product">
-        <h2>💊 Парацетамол 500 мг</h2>
-        <p>Цена: 250 ₽</p>
-        <button class="snipcart-add-item" data-item-id="paracetamol" data-item-price="150" data-item-name="Парацетамол 500 мг" data-item-url="/">🛒 Купить</button>
+<div class="container">
+    <div class="test-warning">
+        
     </div>
-
-    <div class="product">
-        <h2>💊 Аскорбиновая кислота</h2>
-        <p>Цена: 90 ₽</p>
-        <button class="snipcart-add-item" data-item-id="vitamin-c" data-item-price="90" data-item-name="Аскорбиновая кислота" data-item-url="/">🛒 Купить</button>
+    <div class="header">
+    <img src="https://raw.githubusercontent.com/MayorDd-gmod/my-shop/main/ChatGPT_Image_21_2026__09_04_18-round.png" alt="Логотип" style="max-width: 150px; margin-bottom: 15px;">
+    <h1>💊 Мічіган drug store - Лучшая аптека в Доброграде и в округе Уяна!</h1>
+</div>
+            <h2>💊 Обезбол</h2>
+            <div class="price">350 ₽</div>
+            <button class="buy-btn snipcart-add-item" data-item-id="paracetamol" data-item-price="150" data-item-name="Парацетамол 500 мг" data-item-url="/">🛒 Купить</button>
+        </div>
+        <div class="product">
+            <h2>💊 Антибиотик</h2>
+            <div class="price">650 ₽</div>
+            <button class="buy-btn snipcart-add-item" data-item-id="vitamin-c" data-item-price="90" data-item-name="Аскорбиновая кислота" data-item-url="/">🛒 Купить</button>
+        </div>
+        <div class="product">
+            <h2>🌡️ Электронный градусник</h2>
+            <div class="price">450 ₽</div>
+            <button class="buy-btn snipcart-add-item" data-item-id="thermometer" data-item-price="450" data-item-name="Электронный градусник" data-item-url="/">🛒 Купить</button>
+        </div>
     </div>
-
-    <div class="product">
-        <h2>🌡️ Электронный градусник</h2>
-        <p>Цена: 650 ₽</p>
-        <button class="snipcart-add-item" data-item-id="thermometer" data-item-price="450" data-item-name="Электронный градусник" data-item-url="/">🛒 Купить</button>
+    <div class="footer">
+        © 2026 Michigan drug store (By Dunya/Teteshnik)
     </div>
-</body>
-</html>
-            data-item-name="Электронный градусник"
-            data-item-url="/">
-            🛒 Купить
-        </button>
-    </div>
+</div>
 </body>
 </html>
